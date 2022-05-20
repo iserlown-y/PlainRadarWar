@@ -38,3 +38,45 @@ int Square::getRadius()
   int r0 = (m_h > m_w) ? m_w : m_h;
   return r0 / 2;
 }
+
+// □
+void Square::drawRect()
+{
+  arduboy.drawRect(m_x, m_y, m_w, m_h, 1);
+}
+
+// □（内側）
+void Square::drawInRect()
+{
+  arduboy.drawRect(m_x + 1, m_y + 1, m_w - 1, m_h - 1, 1);
+}
+
+// ■
+void Square::fillInRect()
+{
+  arduboy.fillRect(m_x + 1, m_y + 1, m_w - 1, m_h - 1, 1);
+}
+
+// ・
+void Square::centerPoint()
+{
+  Coord *p = getCenter();
+  arduboy.drawPixel(p->m_x, p->m_y, 1);
+  delete p;
+}
+
+// ●
+void Square::fillCircle()
+{
+  Coord *p = getCenter();
+  int r0 = getRadius();
+  arduboy.fillCircle(p->m_x, p->m_y, r0-1, 1);
+  delete p;
+}
+
+// ×
+void Square::drawX()
+{
+  arduboy.drawLine(m_x, m_y, m_x2, m_y2, 1);
+  arduboy.drawLine(m_x, m_y2, m_x2, m_y, 1);
+}

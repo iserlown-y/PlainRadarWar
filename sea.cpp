@@ -44,7 +44,7 @@ void Sea::draw(int phase)
   if(phase == P_SETTING)
   {
     Square *r = getCellSquare(m_cur);
-    arduboy.fillRect(r->m_x + 1, r->m_y + 1, r->m_w - 1, r->m_h - 1, 1);
+    r->fillInRect();
     delete r;
   }
   drawShips();
@@ -257,10 +257,16 @@ byte Sea::getSurvivorLongestShip()
     {
       Coord p(x, y);
       Cell *c = getCell(&p);
-      if (c->m_stype > 0 && !c->m_shooted) {
-        if (c->m_stype > stype){ stype = c->m_stype; }
+      if (c->isSafe()) 
+      {
+        if (c->m_stype > stype)
+        {
+          stype = c->m_stype;
+          if(stype == C_SHIP_NUM){ break; }
+        }
       }
     }
+    if(stype == C_SHIP_NUM){ break; }
   }
   return stype;
 }

@@ -15,7 +15,7 @@ void Radar::draw(int phase)
   if(phase == P_PLAYING)
   {// カーソル描画
     Square *r = getCellSquare(m_cur);
-    arduboy.drawRect(r->m_x + 1, r->m_y + 1, r->m_w - 1, r->m_h - 1, 1);
+    r->drawInRect();
     delete r;
   }
   else if(phase == P_RESULT)

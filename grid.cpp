@@ -40,7 +40,7 @@ void Grid::init()
 void Grid::draw()
 {
   // 枠
-  arduboy.drawRect(square->m_x, square->m_y, square->m_w, square->m_h, 1);
+  square->drawRect();
   for(int row=1; row<C_Y_NUM; row++)
   {
     int y = get_pos_y(row);
@@ -310,24 +310,18 @@ void Grid::paintCell(Coord *p)
 void Grid::paintMiss(Square *r)
 {
   // ・
-  Coord *p = r->getCenter();
-  arduboy.drawPixel(p->m_x, p->m_y, 1);
-  delete p;
+  r->centerPoint();
 }
 
 void Grid::paintHit(Square *r, bool isKill)
 {
   if(isKill)
   {// ●
-    Coord *p = r->getCenter();
-    int r0 = r->getRadius();
-    arduboy.fillCircle(p->m_x, p->m_y, r0-1, 1);
-    delete p;
+    r->fillCircle();
   }
   else
   {// ×
-    arduboy.drawLine(r->m_x, r->m_y, r->m_x2, r->m_y2, 1);
-    arduboy.drawLine(r->m_x, r->m_y2, r->m_x2, r->m_y, 1);
+    r->drawX();
   }
 }
 
@@ -335,7 +329,7 @@ void Grid::paintFrame(Square *r, byte frame)
 {
   if(frame % F_SKIP == 0)
   {// ■
-    arduboy.fillRect(r->m_x, r->m_y, C_CELL_WIDTH, C_CELL_WIDTH, 1);
+    r->fillInRect();
   }
 }
 

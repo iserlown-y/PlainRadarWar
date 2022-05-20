@@ -1,5 +1,5 @@
 /*
- * Plain RaderWar ver1.0.0
+ * Plain RadarWar ver1.0.0
  * Arduboy用のレーダー作戦ゲーム
  */
 #include "globals.h"
